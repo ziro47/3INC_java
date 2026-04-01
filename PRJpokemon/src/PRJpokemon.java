@@ -20,10 +20,10 @@ public class PRJpokemon {
         p.registraPartita(40);
 
         System.out.println(p.stampaStorico());
-        System.out.println("Record: " + p.migliorPunteggio());
+        /*System.out.println("Record: " + p.migliorPunteggio());
         System.out.println("Media: " + p.mediaPunti());
         System.out.println("Vittorie: " + p.partiteVinte());
-        System.out.println(p.partiteVinte());
+        System.out.println(p.partiteVinte());*/
     }
     
 }
