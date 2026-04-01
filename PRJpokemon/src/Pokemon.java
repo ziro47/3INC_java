@@ -78,13 +78,19 @@ public class Pokemon {
         return txt;
     }
     
-    public int registraPartita(int punt){
-        punteggio = punteggio + punt;
-        return punteggio;
+    public boolean registraPartita(int punt){
+        boolean controllo;
+        if (punt > -1){
+            puntiPartite.addElem(punt);
+            controllo = true;
+        } else {
+        controllo = false;
+        }
+        return controllo;
     }
     
     public String stampaStorico(){
-        return punteggio
+       return puntiPartite.stampa();
     }
     
     public String stampa(){
