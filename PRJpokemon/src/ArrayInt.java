@@ -70,9 +70,58 @@ public class ArrayInt {
                 risultato = true;
                 i++;
             }
+        }
+    return risultato;}
+    
+    
+    
+    public boolean isMin(int magg){
+        boolean risultato = false;
+        for(int i=0; i<arr.length; i++){
+            if(magg < arr[i]){
+                risultato = true;
+                i++;
+            }
 
         }
     return risultato;}
+    
+    public int max() {
+        int massimo = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > massimo){
+            massimo = arr[i];
+            }
+        }
+    return massimo;}
+
+    
+    public int min() {
+        int minimo = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < minimo){
+                minimo = arr[i];
+            }
+        }      
+    return minimo;}
+    
+    public double media() {
+        int somma = 0;
+        for (int i = 0; i < dimL; i++) {
+            somma += arr[i];
+        }
+    return (double) somma / dimL;}
+    
+    public int get(int index) {
+        if (index < 0 && index <= dimL){
+            System.out.println("indice non valido" + index);
+            return -1;
+        }
+    return arr[index];}
+
+
+
+
 
 }
 
