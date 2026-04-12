@@ -12,7 +12,7 @@ public class PRJpokemon {
 
     public static void main(String[] args) {
         Pokemon p = new Pokemon("Gengar","dark", 47, 200);
-        p.aggiuingiMossa("stronzo", 50);
+        p.aggiuingiMossa("flash", 50);
         p.registraPartita(50);
         p.registraPartita(25);
         p.registraPartita(80);
@@ -31,7 +31,7 @@ public class PRJpokemon {
         //System.out.println(p.analisiPokemon());
         System.out.println(p.potenzaAttacco(0));
         System.out.println(p.calcolaPuntiPartita(50));
-        System.out.println(p.combatti(par, "stronzo", "pow"));
+        System.out.println(p.combatti(par, "flash", "pow"));
         
         
         

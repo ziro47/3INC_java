@@ -143,7 +143,7 @@ public class Pokemon {
     
     public int mossaForza(String mossa) {
         switch (mossa.toLowerCase()) {
-            case "stronzo": return 50;
+            case "flash": return 50;
             case "pow": return 40;
             default: return 0;
         }
