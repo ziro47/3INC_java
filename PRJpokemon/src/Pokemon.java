@@ -13,9 +13,12 @@ public class Pokemon {
     private int livello;
     private int puntiVita;
     private String codicePokemon;
-    private int nMosse;
     private String[] mosse;
-    private int nmosse;
+    private int numeroMosse; 
+    private int[] dannii;
+    private int numeroDanni; 
+
+
     private ArrayInt puntiPartite;
     private int punteggio;
 
@@ -26,6 +29,11 @@ public class Pokemon {
         this.puntiVita = puntiVita;
         this.codicePokemon = generaCodice();
         puntiPartite = new ArrayInt(10);
+        this.mosse = new String[4];
+        this.numeroMosse = 0;
+        this.dannii = new int[4];
+        this.numeroDanni = 0;
+        
     }
 
     public String getNome() {
@@ -61,22 +69,26 @@ public class Pokemon {
         }
     }
     
-    public boolean aggiuingiMossa(String mossa){
-        if (nmosse < 4){
-            mosse[nMosse] = mossa;
-            nMosse ++;
+    public boolean aggiuingiMossa(String mossa, int danni){
+        if (numeroMosse < mosse.length) {
+            mosse[numeroMosse] = mossa;
+            numeroMosse++; 
+            
+            dannii[numeroDanni] = danni;
+            numeroDanni ++;
             return true;
         }
         return false;
     }
     
     public String stampaMosse(){
-        String txt = "";
-        for(int i = 0; i < nMosse; i++){
-            txt += mosse[i] + "\n";
+        String risultato = "Mosse: ";
+        for (int i = 0; i < numeroMosse; i++) {
+            risultato += mosse[i] + "\n";
         }
-        return txt;
-    }
+    return risultato;}
+    
+    
     
     public boolean registraPartita(int punt){
         boolean controllo;
@@ -93,6 +105,96 @@ public class Pokemon {
        return puntiPartite.stampa();
     }
     
+    public int migliorPunteggio(){
+        return puntiPartite.max();
+    }
+    
+    public double mediaPunteggio(){
+        return puntiPartite.media();
+    }
+    
+    public boolean haBattutoRecord(int punteggio){
+        return puntiPartite.isMax(punteggio);
+    }
+    
+    public int partiteVinte(){
+        int vincite = 0;
+        for (int i = 0; i<puntiPartite.size(); i++){
+            if(puntiPartite.get(i) > 50){
+                vincite++;
+            }
+        }
+    return vincite;}
+    
+
+    public String analisiPokemon(){
+        String txt = "Pokemon: " + nome + "\nMiglior punteggio: " + migliorPunteggio() + "\nMedia punti: " + mediaPunteggio() + "\nNumero Vittorie: " + partiteVinte();
+    return txt;}
+    
+    public int potenzaAttacco(int indiceMossa){
+        int danni = dannii[indiceMossa];
+        int potenza = livello + danni;
+    return potenza;}
+    
+    public int calcolaPuntiPartita(int potenza){
+        int punti = potenza * 2;
+        return punti;
+    }
+    
+    public int mossaForza(String mossa) {
+        switch (mossa.toLowerCase()) {
+            case "stronzo": return 50;
+            case "pow": return 40;
+            default: return 0;
+        }
+    }   
+    
+    
+    public String combatti(Pokemon avversario, String mossa1, String mossa2) {
+
+        int potenza1 = this.potenzaAttacco(int indiceMossa);
+        int potenza2 = avversario.potenzaAttacco(int indiceMossa);
+        int punti1 = this.calcolaPuntiPartita(potenza1);
+        int punti2 = avversario.calcolaPuntiPartita(potenza2);
+
+        
+        
+        String vincitore = "";
+        if (potenza1 > potenza2) {
+            punti1 += 20;
+            vincitore = this.nome;
+        } else if (potenza2 > potenza1) {
+            punti2 += 20;
+            vincitore = avversario.nome;
+        } else {
+            vincitore = "Pareggio";
+        }
+
+
+        this.registraPartita(punti1);
+        avversario.registraPartita(punti2);
+
+
+        String risultato = "";
+        risultato += this.nome + "\n";
+        risultato += "livello = " + this.livello + "\n";
+        risultato += "mossa = " + mossa1 + "\n";
+        risultato += "potenza = " + potenza1 + "\n";
+        risultato += "punti = " + punti1 + "\n\n";
+
+        risultato += avversario.nome + "\n";
+        risultato += "livello = " + avversario.livello + "\n";
+        risultato += "mossa = " + mossa2 + "\n";
+        risultato += "potenza = " + potenza2 + "\n";
+        risultato += "punti = " + punti2 + "\n\n";
+
+        risultato += "Risultato: " + vincitore;
+
+        return risultato;
+    }
+
+
+    
     public String stampa(){
         String txt= "";
         txt += "nome: " + nome;
@@ -102,6 +204,6 @@ public class Pokemon {
         txt += "\ncodice: " + generaCodice();
         return txt;
     }
-    
+
 
 }
