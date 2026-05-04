@@ -120,7 +120,25 @@ public class ArrayInt {
     return arr[index];}
 
 
+    public boolean inserisciOrdinato(int valore) {
+        if (dimL >= arr.length) {
+            return false;
+        }
+        
+        int pos = 0;
+        while (pos < dimL && arr[pos] < valore) {
+            pos++;
+        }
+        
+        for (int i = dimL; i > pos; i--) {
+            arr[i] = arr[i - 1];
+        }
+        
+        arr[pos] = valore;
+        dimL++;
 
+        return true;
+    }
 
 
 }
